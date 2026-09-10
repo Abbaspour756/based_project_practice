@@ -1,8 +1,12 @@
+import numpy as np
+import pandas as pd
+
 from src.game_logic.hint_generator import provide_hint
 from src.game_logic.number_generator import generate_random_number
 from src.utils.input_validator import get_valid_input
 
-
+pd.api()
+np.abs()
 def main():
     score = 100
     actual_number = generate_random_number(1, 100)
