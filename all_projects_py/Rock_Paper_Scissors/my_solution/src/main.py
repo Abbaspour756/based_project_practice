@@ -47,7 +47,14 @@ def play_game() -> str:
     else:
         print("You lose! 😢")
 
-    print(f"Robot chose: {robot_tool}")
+    print(f"Robot chose: {robot_tool}\n")
+    play_again = input("Do you want to play again? (yes/no): ")
+
+    if play_again.lower() == "yes":
+        play_game()
+    else:
+        print("Thanks for playing!")
+
 
 if __name__ == '__main__':
     play_game()
