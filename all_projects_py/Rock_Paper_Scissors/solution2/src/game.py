@@ -1,8 +1,17 @@
+"""
+Author: Ali Abbaspour
+Date: 2026-09-14
+Description: this is a simple Rock Paper Scissors game
+"""
+
+
 import random
 
 
 class RockPaperScissors:
-    def __init__(self, name):
+    """Main class for Rock Paper Scissors game.
+    """
+    def __init__(self, name: str):
         self.choices = ['rock', 'paper', 'scissors']
         self.name = name
     def get_player_choice(self):
@@ -15,9 +24,16 @@ class RockPaperScissors:
             return self.get_player_choice()
         
     def get_computer_choice(self):
+        """Get computer choice randomly from choices: rock, paper, scissors."""
         return random.choice(self.choices)
     
-    def decide_winner(self, user_choice, computer_choice):
+    def decide_winner(self, user_choice: str, computer_choice: str) -> str:
+        """Decide the winner based on user and computer choices.
+
+        :param user_choice: the choice made by the user (rock, paper, or scissors)
+        :param computer_choice: the choice made by the computer (rock, paper, or scissors)
+        :return: a string indicating the result of the game (tie, user wins, or computer wins)
+        """
         if user_choice == computer_choice:
             return "It's a tie!"
         win_combination = [('rock', 'scissors'), ('paper', 'rock'), ('scissors', 'paper')]
@@ -28,6 +44,7 @@ class RockPaperScissors:
                 return 'you lose'
 
     def play(self):
+        """play the game by getting user and computer choices, printing them, and deciding the winner."""
         user_choice = self.get_player_choice()
         computer_choice = self.get_computer_choice()
         print(f"{self.name} chose {user_choice} and computer chose {computer_choice}")
