@@ -32,7 +32,7 @@ class TicTacToe:
         """Allow player X to choose an empty cell and place an X."""
         # Ask player X to choose a cell from 1 to 9.
         target = int(input('player X, choose a cell: '))
-
+        
         # Convert the cell number into row and column indexes.
         row = (target - 1) // 3
         col = (target - 1) % 3
@@ -52,57 +52,55 @@ def start():
     # Create a new Tic-Tac-Toe game.
     game = TicTacToe()
 
-    # Display the empty board before the game starts.
-    game.show_board()
-
-    # Keep the game running while win is True.
     win = True
+    
+    winning_positions = [
+        [(0, 0), (0, 1), (0, 2)],
+        [(1, 0), (1, 1), (1, 2)],
+        [(2, 0), (2, 1), (2, 2)],
+        [(0, 0), (1, 0), (2, 0)],
+        [(0, 1), (1, 1), (2, 1)],
+        [(0, 2), (1, 2), (2, 2)],
+        [(0, 0), (1, 1), (2, 2)],
+        [(0, 2), (1, 1), (2, 0)]
+    ]
 
     while win:
-        # Player O makes a move.
+
+        # Player O
         game.circle()
         game.show_board()
 
-        # Player X makes a move.
+        for positions in winning_positions:
+            player = game.board[positions[0][0]][positions[0][1]]
+
+            if player != ' ' and all(
+                game.board[row][col] == player
+                for row, col in positions
+            ):
+                print('player', player, 'wins')
+                return
+
+        if all(cell != ' ' for row in game.board for cell in row):
+            print('Draw!')
+            return
+
+        # Player X
         game.cross()
         game.show_board()
 
-        # Check the first row for a win by player O.
-        if game.board[0][0] == game.board[0][1] == game.board[0][2] == ('O'):
-            win = False
-            print('player', game.board[0][0], 'wins')
-            return
-        
-        # Check the second row for a win by player O.
-        if game.board[1][0] == game.board[1][1] == game.board[1][2] == ('O'):
-            win = False
-            print('player', game.board[1][0], 'wins')
-            return
-        
-        # Check the third row for a win by player O.
-        if game.board[2][0] == game.board[2][1] == game.board[2][2] == ('O'):
-            win = False
-            print('player', game.board[2][0], 'wins')
-            return
-        
-        # Check the first column for a win by player O.
-        if game.board[0][0] == game.board[1][0] == game.board[2][0] == ('O'):
-            win = False
-            print('player', game.board[0][0], 'wins')
-            return
-        
-        # Check the main diagonal for a win by player O.
-        if game.board[0][0] == game.board[1][1] == game.board[2][2] == ('O'):
-            win = False
-            print('player', game.board[1][1], 'wins')
-            return
+        for positions in winning_positions:
+            player = game.board[positions[0][0]][positions[0][1]]
 
-        # Check whether all cells are occupied.
+            if player != ' ' and all(
+                game.board[row][col] == player
+                for row, col in positions
+            ):
+                print('player', player, 'wins')
+                return
+
         if all(cell != ' ' for row in game.board for cell in row):
-            win = False
-            print("Draw!")
+            print('Draw!')
             return
-
-
 if __name__ == '__main__':
     start()
