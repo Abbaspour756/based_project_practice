@@ -65,6 +65,7 @@ def start():
         [(0, 2), (1, 1), (2, 0)]
     ]
 
+    game.show_board()
     while win:
 
         # Player O
@@ -88,6 +89,7 @@ def start():
         # Player X
         game.cross()
         game.show_board()
+
 
         for positions in winning_positions:
             player = game.board[positions[0][0]][positions[0][1]]
